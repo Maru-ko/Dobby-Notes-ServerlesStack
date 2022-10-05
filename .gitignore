@@ -1,0 +1,21 @@
+# dependencies
+node_modules
+
+# sst
+.sst
+.build
+
+# misc
+.DS_Store
+
+# local env files
+.env*.local
+
+
+# Ignore all SQLite databases
+db/*.sqlite3
+.up_DOG
+node_modules
+build
+.eslintrc.js
+.env
