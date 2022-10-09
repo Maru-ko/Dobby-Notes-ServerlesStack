@@ -6,7 +6,7 @@ Make it easy to go serverless
 
 Developer has power over all the scope -> No Infrastructure Team
 
-bluegreen/canatry
+bluegreen/canary
 
 
 Deploy Service
