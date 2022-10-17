@@ -1,25 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./App.css";
+import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
 import { AppContext } from "./lib/contextLib";
+import { Auth } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
+import { onError } from "./lib/errorLib";
 
 function App() {
-  
+  const nav = useNavigate();
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false); 
 
+  
+  useEffect(() => {
+    onLoad();
+  }, []);
+  
+  async function onLoad() {
+    try {
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    } catch (e) {
+      if (e !== "No current user") {
+        onError(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
+  
+  async function handleLogout() {
+    await Auth.signOut();
+  
+    userHasAuthenticated(false);
+  
+    nav("/login");
+  }
+
   return (
+    !isAuthenticating && (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+      <LinkContainer to="/">
         <Navbar.Brand href="/" className="font-weight-bold text-muted">
           DreamSugar
         </Navbar.Brand>
+      </LinkContainer>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Nav>
-            <Nav.Link href="/signup">Signup</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
+        <Nav activeKey={window.location.pathname}>
+        {isAuthenticated ? (
+      <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+   ) : (
+    <>
+      <LinkContainer to="/signup">
+        <Nav.Link>Signup</Nav.Link>
+      </LinkContainer>
+      <LinkContainer to="/login">
+        <Nav.Link>Login</Nav.Link>
+      </LinkContainer>
+    </>
+  )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -27,6 +71,7 @@ function App() {
         <Routes />
       </AppContext.Provider>
     </div>
+  )
   );
 }
 
