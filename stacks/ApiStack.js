@@ -6,7 +6,7 @@ export function ApiStack({ stack, app }) {
   const { table } = use(StorageStack);
   // Create the API
   const api = new Api(stack, "Api", {
-    // customDomain: app.stage === "prod" ? "api.my-serverless-app.com" : undefined,
+    customDomain: app.stage === "prod" ? "api.my-serverless-app.com" : undefined,
     defaults: {
       authorizer: "iam",
       function: {
