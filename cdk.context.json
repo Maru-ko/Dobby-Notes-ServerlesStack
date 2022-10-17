@@ -1,1 +1,6 @@
-{}
+{
+  "hosted-zone:account=546622014048:domainName=dobbynotes.link:region=us-east-1": {
+    "Id": "/hostedzone/Z00340392UKE5WX3J90AH",
+    "Name": "dobbynotes.link."
+  }
+}
