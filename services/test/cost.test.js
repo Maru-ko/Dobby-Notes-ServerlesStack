@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { calculateCost } from "../util/cost";
-
+// /Volumes/HIYOKKO/Downloads/react-project-one/SST/notes/services/util/cost.js
 test("Lowest tier", () => {
   const storage = 10;
 

@@ -12,8 +12,8 @@ export function FrontendStack({ stack, app }) {
   const site = new ReactStaticSite(stack, "ReactSite", {
     customDomain: app.stage === "prod"
     ? {
-        domainName: "my-serverless-app.com",
-        domainAlias: "www.my-serverless-app.com",
+        domainName: "dobbynotes.link",
+        domainAlias: "www.dobbynotes.link",
       }
     : undefined,
     path: "frontend",
