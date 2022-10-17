@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./App.css";
 import Routes from "./Routes";
+import { AppContext } from "./lib/contextLib";
 
 function App() {
+  
+  const [isAuthenticated, userHasAuthenticated] = useState(false); 
+
   return (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
@@ -19,7 +23,9 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes />
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated}}>
+        <Routes />
+      </AppContext.Provider>
     </div>
   );
 }
