@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../lib/contextLib";
 import { useFormFields } from "../lib/hooksLib";
@@ -9,7 +9,7 @@ import { onError } from "../lib/errorLib";
 import "./Login.css";
 
 export default function Login() {
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
@@ -29,7 +29,7 @@ export default function Login() {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      nav("/");
+      // nav("/");
     } catch (e) {
       onError(e);
       setIsLoading(false);

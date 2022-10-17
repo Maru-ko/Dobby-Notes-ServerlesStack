@@ -14,11 +14,47 @@ export default function Links() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/notes/new" element={<NewNote />} />
-      <Route path="/notes/:id" element={<Notes />} />
+        <Route
+    path="/login"
+    element={
+      <UnauthenticatedRoute>
+        <Login />
+      </UnauthenticatedRoute>
+    }
+  />
+  <Route
+    path="/signup"
+    element={
+      <UnauthenticatedRoute>
+        <Signup />
+      </UnauthenticatedRoute>
+    }
+  />
+  <Route
+    path="/settings"
+    element={
+      <AuthenticatedRoute>
+        <Settings />
+      </AuthenticatedRoute>
+    }
+  />
+  <Route
+    path="/notes/new"
+    element={
+      <AuthenticatedRoute>
+        <NewNote />
+      </AuthenticatedRoute>
+    }
+  />   
+
+  <Route
+    path="/notes/:id"
+    element={
+      <AuthenticatedRoute>
+        <Notes />
+      </AuthenticatedRoute>
+    }
+  />
       <Route path="*" element={<NotFound />} />;
     </Routes>
   );
