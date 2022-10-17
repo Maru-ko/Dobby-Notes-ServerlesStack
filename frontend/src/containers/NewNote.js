@@ -8,6 +8,7 @@ import "./NewNote.css";
 import { API } from "aws-amplify";
 import { s3Upload } from "../lib/awsLib";
 
+
 export default function NewNote() {
   const file = useRef(null);
   const nav = useNavigate();
